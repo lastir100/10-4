@@ -1,0 +1,21 @@
+---
+- name: test
+  gather_facts: false
+  hosts: vms
+  vars:
+    ansible_ssh_user: lastir
+  become: yes
+
+
+  tasks:
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: present
+      update_cache: yes
+  - name: Start service nginx, if not started and enable
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
